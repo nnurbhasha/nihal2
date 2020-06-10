@@ -6,6 +6,9 @@ import Nav from "react-bootstrap/Nav";
 import "./App.css";
 
 import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 // covert App.js component into class-based component b/c using state
 class App extends React.Component {
@@ -31,6 +34,8 @@ class App extends React.Component {
       },
     };
   }
+  // date from this state data passed as props into pages b/c pages don't have to be class-based component then; they can be functional components --> they simply display data while we maintain this state in main component
+  // don't want stateful components everywhere --> issues with predictabilty
 
   //container from bootstrap
   // fluid= {true} --> take up entire width of screen
@@ -57,9 +62,36 @@ class App extends React.Component {
             </Navbar.Collapse>
           </Navbar>
 
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <HomePage
+                title={this.state.home.title}
+                subTitle={this.state.home.subTitle}
+                text={this.state.home.text}
+              />
+            )}
+          />
+
+          <Route
+            path="/about "
+            render={() => <AboutPage title={this.state.about.title} />}
+          />
+
+          <Route
+            path="/contact"
+            render={() => <ContactPage title={this.state.contact.title} />}
+          />
+
           <Footer />
         </Container>
       </Router>
+      // using React Router to say that when we are on a certain path, render or display a certain component
+      // React Router uses the link component instead of anchor tag or button
+      // link specifies path to be taken
+      // inside of Route: whenever at specified path, render according component
+      // multiple ways, but this way chosen b/c props passed
     );
   }
 }
