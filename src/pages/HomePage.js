@@ -1,8 +1,12 @@
 import React from "react";
 
+import Hero from "../components/Hero";
+
 // function component; does not have to manage state
 function HomePage(props) {
-  return <p>HomePage Works!</p>;
+  return (
+    <Hero title={props.title} subTitle={props.subTitle} text={props.text} />
+  );
 }
 
 export default HomePage;
